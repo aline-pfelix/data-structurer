@@ -36,13 +36,7 @@ O programa concatena `Specimen-code-prefix` + `Specimen-code-number` para formar
 
 ## Download
 
-Para apenas usar o programa (sem mexer no código), rode o instalador mais recente:
-
-```
-D:\Workspace\Ferramentas_dev\Instaladores\Instalador_DataStructurer\Data Structurer installer 3.0.1.exe
-```
-
-> Este repositório ainda não foi publicado no GitHub; quando for, esta seção passa a apontar para a aba **Releases**. As seções abaixo são voltadas para desenvolvimento a partir do código-fonte.
+Para apenas usar o programa (sem mexer no código), baixe o instalador mais recente na aba [Releases](https://github.com/aline-pfelix/datastructurer/releases/latest) e rode o `.exe`. As seções abaixo são voltadas para desenvolvimento a partir do código-fonte.
 
 ## Estrutura do projeto
 
@@ -104,7 +98,7 @@ Duas etapas: primeiro empacotar o `.exe` com PyInstaller, depois gerar o instala
 
 2. **Gerar o instalador com Inno Setup:** abra `D:\Workspace\Ferramentas_dev\Instaladores\Instalador_DataStructurer\sript_data_structure_v106.iss` no Inno Setup (ou compile via linha de comando com `ISCC.exe`) e compile. Antes de compilar uma versão nova, atualize `MyAppVersion`, `MyAppExeName` e `OutputBaseFilename` no início do script para o número da nova versão — os caminhos em `Source:` e `SetupIconFile` já apontam para este repositório (`D:\Workspace\Ferramentas_dev\scripts\datastructurer`).
 
-   O instalador é gerado em `D:\Workspace\Ferramentas_dev\Instaladores\Instalador_DataStructurer\` e distribuído manualmente.
+   O instalador é gerado em `D:\Workspace\Ferramentas_dev\Instaladores\Instalador_DataStructurer\` e publicado manualmente como asset de uma nova [Release](https://github.com/aline-pfelix/datastructurer/releases) no GitHub.
 
 ## Observações
 
