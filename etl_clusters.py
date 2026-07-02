@@ -16,6 +16,9 @@ class EtlClusters:
         }
     }
 
+    # ------------------------------------------------------------------------- #
+    # PROCESSAMENTO DOS CLUSTERS                                                #
+    # ------------------------------------------------------------------------- #
     def to_process(self, pasta, pasta_output, text_log, btn_exec, root, codespeciescompleted):
         Utilits.append_log(text_log, "Procurando arquivos com sufixo '-ids' (lista de clusters)...")
         
@@ -30,7 +33,7 @@ class EtlClusters:
             btn_exec.configure(state='normal')
             return None
         
-        # Trasnformação e limpeza dos dados
+        # ---- ETAPA 1: TRANSFORMAÇÃO E LIMPEZA DOS DADOS ---- #
         columns_cluster = ['clusterCode', 'especime']
 
         dfs_cluster.columns = columns_cluster
@@ -42,10 +45,10 @@ class EtlClusters:
 
         df_filtered = dfs_cluster[~dfs_cluster['specimenCodeCluster'].str.contains('neg', case=False)]
 
-        # Valida regex
+        # ---- ETAPA 2: VALIDAÇÃO DE REGEX ---- #
         self._validate_regex(df_filtered)
 
-        # Verifica duplicatas
+        # ---- ETAPA 3: VERIFICAÇÃO DE DUPLICATAS ---- #
         column_name = 'specimenCodeCluster'
         process_file = Process_file()
         process_file.verify_duplicates(
@@ -57,7 +60,7 @@ class EtlClusters:
             column_name
         )
 
-        # Verifica se demfile está em cluters 
+        # ---- ETAPA 4: VERIFICAÇÃO DE CONSISTÊNCIA COM O DEMFILE ---- #
         codespeciescompleted_cluster = set(dfs_cluster
         ['specimenCodeCluster'])
 
@@ -73,7 +76,7 @@ class EtlClusters:
             
         )
 
-        # Limpa excedente
+        # ---- ETAPA 5: LIMPEZA DE EXCEDENTES ---- #
         dfs_cluster = dfs_cluster[dfs_cluster['specimenCodeCluster'].isin(list_clean)]
 
 

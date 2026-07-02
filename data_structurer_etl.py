@@ -21,9 +21,9 @@ from tkinter import ttk, filedialog, messagebox
 # Lista global para armazenar as corridas
 corridas_list = []
 
-# ---------------------------
-# Construção da janela principal
-# ---------------------------
+# ------------------------------------------------------------------------- #
+# CONSTRUÇÃO DA JANELA PRINCIPAL                                            #
+# ------------------------------------------------------------------------- #
 def create_main_window():
     root = tk.Tk()
     root.iconbitmap("Borboleta.ico")
@@ -271,10 +271,13 @@ def create_main_window():
 
 
 
+    # ------------------------------------------------------------------------- #
+    # COLETA E EXECUÇÃO DA CORRIDA                                              #
+    # ------------------------------------------------------------------------- #
     def on_action(add_another: bool):
         global corridas_list
 
-        # ---------- 1. Coleta e valida dados básicos ----------
+        # ---- ETAPA 1: COLETA E VALIDAÇÃO DOS DADOS BÁSICOS ---- #
         caminho = ent_folder.get().strip()
         if not caminho or not os.path.isdir(caminho):
             messagebox.showerror("Erro", "Selecione uma pasta válida da corrida.")
@@ -324,7 +327,7 @@ def create_main_window():
             messagebox.showerror("Erro", str(e))
             return
 
-        # ---------- 2. Intervalos (respeitando "todas") ----------
+        # ---- ETAPA 2: INTERVALOS (RESPEITANDO 'TODAS') ---- #
         intervals_map = {}
 
         # try:
@@ -358,7 +361,7 @@ def create_main_window():
         txt_log.configure(state='disabled')
 
 
-        # ---------- 3. Armazena corrida ----------
+        # ---- ETAPA 3: ARMAZENAR CORRIDA ---- #
         corrida_atual = {
             'caminho': caminho,
             'parametros': {
@@ -376,7 +379,7 @@ def create_main_window():
 
         corridas_list.append(corrida_atual)
 
-        # ---------- 4. Limpar interface se adicionar ----------
+        # ---- ETAPA 4: LIMPAR INTERFACE SE ADICIONAR ---- #
         if add_another:
             ent_folder.delete(0, tk.END)
             ent_minion.delete(0, tk.END)
@@ -407,7 +410,7 @@ def create_main_window():
             txt_log.configure(state='disabled')
             return
 
-        # ---------- 5. Executar ETL ----------
+        # ---- ETAPA 5: EXECUTAR ETL ---- #
         btn_exec.configure(state='disabled')
 
         txt_log.configure(state='normal')
@@ -425,9 +428,9 @@ def create_main_window():
 
     return root
 
-# ---------------------------
-# Run
-# ---------------------------
+# ------------------------------------------------------------------------- #
+# EXECUÇÃO                                                                  #
+# ------------------------------------------------------------------------- #
 if __name__ == "__main__":
     root = create_main_window()
     root.mainloop()

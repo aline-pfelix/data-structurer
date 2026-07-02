@@ -31,6 +31,9 @@ class Intervals:
             for start, end in intervalos
         )
 
+    # ------------------------------------------------------------------------- #
+    # APLICAÇÃO DE INTERVALOS DE PLACA                                          #
+    # ------------------------------------------------------------------------- #
     def apply_intervals_to_df(df_infoextra, intervals_map, log_widget=None):
         if 'plateRackCode' not in df_infoextra.columns:
             raise ValueError("DataFrame infoextra não contém a coluna 'plateRackCode'.")
@@ -133,9 +136,7 @@ class Intervals:
                     f"Placas sem informação:\n{faltante_fmt}"
                 )
 
-        # ---------------------------
-        # Aplicar intervalos
-        # ---------------------------
+        # ---- ETAPA 1: APLICAR INTERVALOS ---- #
         for col, intervals in intervals_map.items():
 
             racks_reais = set(df_infoextra['_rack_num'].dropna())

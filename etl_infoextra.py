@@ -5,6 +5,9 @@ from validacao import Validate
 from processar_etl import Process_file
 
 class EtlInfoExtra:
+    # ------------------------------------------------------------------------- #
+    # PROCESSAMENTO DO INFOEXTRA                                                #
+    # ------------------------------------------------------------------------- #
     def to_process(self, dfs_demfile_concat, parametros, intervals_map, pasta_output, text_log, btn_exec, root):
         if dfs_demfile_concat is None:
             Utilits.abortar_execucao(
@@ -18,7 +21,7 @@ class EtlInfoExtra:
 
         df_infoextra = dfs_demfile_concat[['specimenCode', 'plateRackCode', 'sampleCode']].copy()
 
-        # Preencher as colunas de infoextra com os parâmetros básicos
+        # ---- ETAPA 1: PREENCHER COLUNAS COM OS PARÂMETROS BÁSICOS ---- #
         df_infoextra['minionRun'] = parametros.get('minionrun')
         df_infoextra['sequenceResp'] = parametros.get('respseq')
         df_infoextra['collector'] = parametros.get('respcol')
@@ -28,7 +31,7 @@ class EtlInfoExtra:
             if c not in df_infoextra.columns:
                 df_infoextra[c] = pd.NA
 
-        # Aplicar intervalos / grade
+        # ---- ETAPA 2: APLICAR INTERVALOS / GRADE ---- #
         if any(intervals_map.values()):
             Utilits.append_log(text_log, "Aplicando informações informadas pelo usuário nas colunas (extract/frag/temp/cycle)...")
 
@@ -76,7 +79,7 @@ class EtlInfoExtra:
             )
             return
         
-        # Coordenadas
+        # ---- ETAPA 3: COORDENADAS ---- #
         coord_index = parametros.get('coord_index')
         if coord_index == 1:
             df_infoextra['coordinates'] = "-2.924722, -60.861389"
@@ -100,12 +103,12 @@ class EtlInfoExtra:
             )
             return
 
-        # Limpar controles negativos
+        # ---- ETAPA 4: LIMPAR CONTROLES NEGATIVOS ---- #
         mask_neg = df_infoextra['specimenCode'].astype(str).str.contains('neg', case=False, na=False)
         columns_clean = ['sequenceSuccess', 'extract', 'frag', 'temp', 'cycle', 'coordinates', 'altitude']
         df_infoextra.loc[mask_neg, columns_clean] = pd.NA
 
-        # Validação Final
+        # ---- ETAPA 5: VALIDAÇÃO FINAL ---- #
         try:
             Validate.validate_df_not_nan_conditional(
                 df_infoextra,

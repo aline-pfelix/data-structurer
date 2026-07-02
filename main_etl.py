@@ -30,6 +30,9 @@ class DemfileController:
     global dfs_blasted_concat_all
     global dfs_infoextra_concat_all
 
+    # ------------------------------------------------------------------------- #
+    # EXECUÇÃO DO PIPELINE                                                      #
+    # ------------------------------------------------------------------------- #
     @staticmethod
     def execute_etl_multiple(corridas_list, text_log, btn_exec, root):
         try:
@@ -54,7 +57,7 @@ class DemfileController:
                 #     Utilits.abortar_execucao(mensagem= 'A pasta "etl_results" já existe no destino.')
                 #     btn_exec.configure(state='normal')
 
-                # 1. PROCESSAR DEMFILE
+                # ---- ETAPA 1: PROCESSAR DEMFILE ---- #
                 etl_demfile = EtlDemfile()
                 dfs_demfile_concat, codespeciescompleted = etl_demfile.to_process(
                     pasta, pasta_output, text_log, btn_exec, root,
@@ -65,7 +68,7 @@ class DemfileController:
                     Utilits.append_log(text_log, f"Erro: DEMFILE não processado para a corrida {i}. Abortando.")
                     Utilits.abortar_execucao(mensagem= 'Abortando')
 
-                # 2. PROCESSAR CLUSTERS
+                # ---- ETAPA 2: PROCESSAR CLUSTERS ---- #
                 etl_clusters = EtlClusters()
                 dfs_cluster = etl_clusters.to_process(
                     pasta, pasta_output, text_log, btn_exec, root, codespeciescompleted,
@@ -76,7 +79,7 @@ class DemfileController:
                     Utilits.append_log(text_log, f"Erro: CLUSTERS não processado para a corrida {i}. Continuando.")
                     Utilits.abortar_execucao(mensagem= 'Abortando')
 
-                # 3. PROCESSAR MERGEDDEMFILE
+                # ---- ETAPA 3: PROCESSAR MERGEDDEMFILE ---- #
                 etl_merged = EtlMergedDemfile()
                 dfs_merged_concat = etl_merged.to_process(
                     pasta, pasta_output, text_log, btn_exec, root, codespeciescompleted, 
@@ -87,7 +90,7 @@ class DemfileController:
                     Utilits.append_log(text_log, f"Erro: MERGEDDEMFILE não processado para a corrida {i}. Continuando.")
                     Utilits.abortar_execucao(mensagem= 'Abortando')
 
-                # 4. PROCESSAR FASTA
+                # ---- ETAPA 4: PROCESSAR FASTA ---- #
                 etl_fasta = EtlFasta()
                 df_fasta = etl_fasta.to_process(
                     pasta, pasta_output, text_log, btn_exec, root, codespeciescompleted,
@@ -98,7 +101,7 @@ class DemfileController:
                     Utilits.append_log(text_log, f"Erro: FASTA não processado para a corrida {i}. Continuando.")
                     Utilits.abortar_execucao(mensagem= 'Abortando')
 
-                # 5. PROCESSAR BLAST
+                # ---- ETAPA 5: PROCESSAR BLAST ---- #
                 etl_blast = EtlBlast()
                 dfs_blasted_concat = etl_blast.to_process(
                     pasta, pasta_output, text_log, btn_exec, root,
@@ -110,7 +113,7 @@ class DemfileController:
                     Utilits.append_log(text_log, f"Erro: BLAST não processado para a corrida {i}. Continuando.")
                     Utilits.abortar_execucao(mensagem= 'Abortando')
 
-                # 6. PROCESSAR INFOEXTRA
+                # ---- ETAPA 6: PROCESSAR INFOEXTRA ---- #
                 etl_info = EtlInfoExtra()
                 dfs_infoextra = etl_info.to_process(
                     dfs_demfile_concat, parametros, intervals_map,

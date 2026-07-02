@@ -12,6 +12,9 @@ class EtlMergedDemfile:
         }
     }
 
+    # ------------------------------------------------------------------------- #
+    # PROCESSAMENTO DO MERGEDDEMFILE                                            #
+    # ------------------------------------------------------------------------- #
     def to_process(self, pasta, pasta_output, text_log, btn_exec, root, codespeciescompleted):
         Utilits.append_log(text_log, "Procurando arquivos 'mergeddemfile'...")
         
@@ -25,7 +28,7 @@ class EtlMergedDemfile:
             btn_exec.configure(state='normal')
             return None
         
-        # Transformação e limpza dos dados
+        # ---- ETAPA 1: TRANSFORMAÇÃO E LIMPEZA DOS DADOS ---- #
         columns_merged = ['0', '1', '2', 'primerF', 'primerR']
 
         dfs_merged_concat.columns = columns_merged
@@ -36,10 +39,10 @@ class EtlMergedDemfile:
 
         df_filtered = dfs_merged_concat[~dfs_merged_concat['specimenCodeMerged'].str.contains('neg', case=False)]
 
-        # Valida regex
+        # ---- ETAPA 2: VALIDAÇÃO DE REGEX ---- #
         self._validate_regex(df_filtered)
 
-        # Verifica duplicatas
+        # ---- ETAPA 3: VERIFICAÇÃO DE DUPLICATAS ---- #
         column_name = 'specimenCodeMerged'
         process_file = Process_file()
         process_file.verify_duplicates(
@@ -51,7 +54,7 @@ class EtlMergedDemfile:
             column_name
         )
 
-        # Verifica se é igual ao demfile
+        # ---- ETAPA 4: VERIFICAÇÃO DE CONSISTÊNCIA COM O DEMFILE ---- #
         codespeciescompleted_merged = set(dfs_merged_concat
         ['specimenCodeMerged'])
 

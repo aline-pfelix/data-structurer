@@ -11,6 +11,9 @@ class EtlBlast:
         }
     }
 
+    # ------------------------------------------------------------------------- #
+    # PROCESSAMENTO DO BLAST                                                    #
+    # ------------------------------------------------------------------------- #
     def to_process(self, pasta, pasta_output, text_log, btn_exec, root, datablast, codespeciescompleted):
         Utilits.append_log(text_log, "Procurando arquivos .tsv (output do ReadsIdentifier)...")
         
@@ -25,7 +28,7 @@ class EtlBlast:
             btn_exec.configure(state='normal')
             return None
 
-        # Trasnformação e limpeza dos dados
+        # ---- ETAPA 1: TRANSFORMAÇÃO E LIMPEZA DOS DADOS ---- #
         columns_blasted = ['id_blasted', 'blastSimilarity', 'blastSpecies', 'blastGenus','blastFamily', 'blastOrder', 'class', 'phylum', 'kingdom', '0']
         
         dfs_blasted_concat.columns = columns_blasted
@@ -37,13 +40,13 @@ class EtlBlast:
         
         df_filtered = dfs_blasted_concat[~dfs_blasted_concat['specimenCodeBlast'].str.contains('neg', case=False)]
 
-        # Valida regex
+        # ---- ETAPA 2: VALIDAÇÃO DE REGEX ---- #
         self._validate_regex(df_filtered)
 
-        # Recebe input interface
+        # ---- ETAPA 3: RECEBER PARÂMETRO DA INTERFACE (DATA DO BLAST) ---- #
         dfs_blasted_concat['blastIdDate'] = datablast
 
-        # Verifica duplicatas
+        # ---- ETAPA 4: VERIFICAÇÃO DE DUPLICATAS ---- #
         column_name = 'specimenCodeBlast'
         process_file = Process_file()
         process_file.verify_duplicates(
@@ -55,7 +58,7 @@ class EtlBlast:
             column_name
         )
 
-        # Verifica dentro do demfile
+        # ---- ETAPA 5: VERIFICAÇÃO DE CONSISTÊNCIA COM O DEMFILE ---- #
         codespeciescompleted_blasted = set(dfs_blasted_concat
         ['specimenCodeBlast'])
 

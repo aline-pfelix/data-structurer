@@ -13,6 +13,9 @@ class EtlFasta:
         }
     }
         
+    # ------------------------------------------------------------------------- #
+    # PROCESSAMENTO DO FASTA                                                    #
+    # ------------------------------------------------------------------------- #
     def to_process(self, pasta, pasta_output, text_log, btn_exec, root, codespeciescompleted):
         Utilits.append_log(text_log, "Procurando arquivos fasta (.fa, .fasta)...")
         
@@ -27,12 +30,12 @@ class EtlFasta:
             btn_exec.configure(state='normal')
             return None
 
-        # Trasnformação e limpeza dos dados    
+        # ---- ETAPA 1: TRANSFORMAÇÃO E LIMPEZA DOS DADOS ---- #
         columns_fasta = ['id', 'seq']
 
         df_fasta.columns = columns_fasta
 
-        # Valida tamanho da seq
+        # ---- ETAPA 2: VALIDAÇÃO DO TAMANHO DA SEQUÊNCIA ---- #
         self._validate_seq_length(df_fasta)
 
         df_fasta['specimenCode_id'] = df_fasta['id'].str.split('_').str[1]
@@ -41,10 +44,10 @@ class EtlFasta:
 
         df_filtered = df_fasta[~df_fasta['specimenCode_id'].str.contains('neg', case=False)]
 
-        # Valida regex
+        # ---- ETAPA 3: VALIDAÇÃO DE REGEX ---- #
         self._validate_regex(df_filtered)
 
-        # Verifica duplicatas
+        # ---- ETAPA 4: VERIFICAÇÃO DE DUPLICATAS ---- #
         column_name = 'specimenCode_id'
         process_file = Process_file()
         process_file.verify_duplicates(
@@ -56,7 +59,7 @@ class EtlFasta:
             column_name
         )
 
-        # Verifica dentro do demfile
+        # ---- ETAPA 5: VERIFICAÇÃO DE CONSISTÊNCIA COM O DEMFILE ---- #
         codespeciescompleted_fasta = set(df_fasta
         ['specimenCode_id'])
 

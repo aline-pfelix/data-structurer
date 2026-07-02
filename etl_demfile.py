@@ -38,6 +38,9 @@ class EtlDemfile:
     #     }
     # }
 
+    # ------------------------------------------------------------------------- #
+    # PROCESSAMENTO DO DEMFILE                                                  #
+    # ------------------------------------------------------------------------- #
     def to_process(self, pasta, pasta_output, text_log, btn_exec, root):
         Utilits.append_log(text_log, "Procurando arquivos demfile.xlsx...")
 
