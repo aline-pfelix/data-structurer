@@ -36,12 +36,12 @@ O programa concatena `Specimen-code-prefix` + `Specimen-code-number` para formar
 
 ## Download
 
-Para apenas usar o programa (sem mexer no código), baixe o instalador mais recente na aba [Releases](https://github.com/aline-pfelix/datastructurer/releases/latest) e rode o `.exe`. As seções abaixo são voltadas para desenvolvimento a partir do código-fonte.
+Para apenas usar o programa (sem mexer no código), baixe o instalador mais recente na aba [Releases](https://github.com/aline-pfelix/data-structurer/releases/latest) e rode o `.exe`. As seções abaixo são voltadas para desenvolvimento a partir do código-fonte.
 
 ## Estrutura do projeto
 
 ```
-datastructurer/
+data-structurer/
 ├── data_structurer_etl.py    # ponto de entrada; monta a janela principal (GUI)
 ├── main_etl.py                # orquestra o pipeline de ETL (DemfileController)
 ├── etl_demfile.py              # ETL do Demfile
