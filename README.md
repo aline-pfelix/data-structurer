@@ -39,10 +39,10 @@ O programa concatena `Specimen-code-prefix` + `Specimen-code-number` para formar
 Para apenas usar o programa (sem mexer no código), rode o instalador mais recente:
 
 ```
-D:\Workspace\Ferramentas_dev\Instaladores\Instalador_DataStructurer\Data Structurer installer 3.0.0.exe
+D:\Workspace\Ferramentas_dev\Instaladores\Instalador_DataStructurer\Data Structurer installer 3.0.1.exe
 ```
 
-> Este repositório ainda não foi publicado no GitHub; quando for, esta seção passa a apontar para a aba **Releases**. Veja [Gerando um novo instalador](#gerando-um-novo-instalador) sobre como empacotar uma versão nova. As seções abaixo são voltadas para desenvolvimento a partir do código-fonte.
+> Este repositório ainda não foi publicado no GitHub; quando for, esta seção passa a apontar para a aba **Releases**. As seções abaixo são voltadas para desenvolvimento a partir do código-fonte.
 
 ## Estrutura do projeto
 
@@ -62,7 +62,7 @@ datastructurer/
 ├── placa_grid.py                # widget de grid de placa (96 poços) da GUI
 ├── utilitarios.py               # utilitários compartilhados (log, placeholders, abort)
 ├── Borboleta.ico                 # ícone do app
-├── Data_Structurer_v3.0.0.spec   # build do executável com PyInstaller
+├── Data_Structurer_v3.0.1.spec   # build do executável com PyInstaller
 ├── requirements.txt
 └── requirements-dev.txt
 ```
@@ -97,24 +97,14 @@ Duas etapas: primeiro empacotar o `.exe` com PyInstaller, depois gerar o instala
 
    ```bash
    pip install -r requirements-dev.txt
-   pyinstaller Data_Structurer_v3.0.0.spec
+   pyinstaller Data_Structurer_v3.0.1.spec
    ```
 
    O executável e o `Borboleta.ico` são gerados em `dist/`.
 
-2. **Gerar o instalador com Inno Setup:** abra `D:\Workspace\Ferramentas_dev\Instaladores\Instalador_DataStructurer\sript_data_structure_v106.iss` no Inno Setup e compile. **Atenção:** esse script ainda referencia o caminho antigo do projeto (`D:\Workspace\Ferramentas_dev\scripts\ETL_Database_Biodossel_Bioinsecta`), que não existe mais desde a reorganização do repositório. Antes de compilar, atualize as linhas `Source:` e `SetupIconFile` para apontar para este repositório (`D:\Workspace\Ferramentas_dev\scripts\datastructurer\dist\...`), e ajuste `MyAppVersion`/`OutputBaseFilename` para a nova versão.
+2. **Gerar o instalador com Inno Setup:** abra `D:\Workspace\Ferramentas_dev\Instaladores\Instalador_DataStructurer\sript_data_structure_v106.iss` no Inno Setup (ou compile via linha de comando com `ISCC.exe`) e compile. Antes de compilar uma versão nova, atualize `MyAppVersion`, `MyAppExeName` e `OutputBaseFilename` no início do script para o número da nova versão — os caminhos em `Source:` e `SetupIconFile` já apontam para este repositório (`D:\Workspace\Ferramentas_dev\scripts\datastructurer`).
 
-   O instalador publicado é gerado separadamente a partir desse executável e distribuído manualmente.
-
-## Histórico de mudanças recentes
-
-Reorganização do projeto para publicação no GitHub (código-fonte apenas — sem mudança de comportamento do programa):
-
-- Adicionados `.gitignore`, `LICENSE` (MIT), `README.md`, `requirements.txt` e `requirements-dev.txt`; removidos os `.spec` de versões antigas do PyInstaller (mantido só o `v3.0.0`).
-- Removido `guiv2.py` (código morto — versão antiga da UI de intervalos, substituída pelo `PlacaGrid`).
-- Módulos renomeados para remover sufixos de versão do nome do arquivo (ex: `ETL_FASTA_v4.py` → `etl_fasta.py`, `main_etlv4.py` → `main_etl.py`, `utilitariosv2.py` → `utilitarios.py`); histórico de versão agora vive no `git`, não no nome do arquivo.
-- Comentários de seção padronizados em blocos de "Título" (`# --- # / # TEXTO # / # --- #`) e "Subtítulo" (`# ---- ETAPA N: TEXTO ---- #`) nos métodos principais do pipeline de ETL.
-- Removidos ~270 linhas de código morto: blocos comentados de implementações antigas, imports e variáveis locais não usados, um trecho inalcançável em `intervalos.py` e métodos nunca chamados (`Process_file.export_csv`, `Process_file._read_inputfiles_csv`, `Utilits.show_error`, `Validate.validate_regex`, `PlacaGrid.get_data`).
+   O instalador é gerado em `D:\Workspace\Ferramentas_dev\Instaladores\Instalador_DataStructurer\` e distribuído manualmente.
 
 ## Observações
 

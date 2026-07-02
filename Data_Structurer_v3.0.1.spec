@@ -22,7 +22,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='Data_Structurer_v3.0.0',
+    name='Data_Structurer_v3.0.1',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
