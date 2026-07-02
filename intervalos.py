@@ -1,7 +1,7 @@
 import pandas as pd
 import re
-from utilitariosv2 import Utilits
-from validacao_v2 import Validate
+from utilitarios import Utilits
+from validacao import Validate
 
 class Intervals:
     def generate_continuous_intervals(valores):

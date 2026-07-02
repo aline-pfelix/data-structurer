@@ -1,7 +1,7 @@
 import pandas as pd
-from utilitariosv2 import Utilits
-from validacao_v2 import Validate
-from processar_etlv2 import Process_file
+from utilitarios import Utilits
+from validacao import Validate
+from processar_etl import Process_file
 from tkinter import messagebox
 
 

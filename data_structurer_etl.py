@@ -5,10 +5,10 @@
 # ---------------------------------------------------------------------
 # from guiv2 import IntervalEditor
 from placa_grid import PlacaGrid
-from utilitariosv2 import Utilits
-from validacao_v2 import Validate
+from utilitarios import Utilits
+from validacao import Validate
 from intervalos import Intervals
-from main_etlv4 import DemfileController
+from main_etl import DemfileController
 import os
 import threading
 from pathlib import Path

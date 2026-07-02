@@ -25,13 +25,13 @@ prontas para importação em banco de dados.
 | Arquivo | Responsabilidade |
 |---|---|
 | `data_structurer_etl.py` | Ponto de entrada; monta a janela principal (GUI). |
-| `main_etlv4.py` | Orquestra o pipeline de ETL (`DemfileController`). |
-| `ETL_DEMFILE_v3.py`, `ETL_CLUSTERS_v3.py`, `ETL_MERGEDDEMFILE_v3.py`, `ETL_FASTA_v4.py`, `ETL_BLAST_v2.py`, `ETL_INFOEXTRA_v2.py` | Um ETL por tipo de arquivo de entrada. |
-| `processar_etlv2.py` | Leitura/escrita de arquivos (Excel, CSV, FASTA) e concatenação. |
-| `validacao_v2.py` | Regras de validação de arquivos e dados. |
+| `main_etl.py` | Orquestra o pipeline de ETL (`DemfileController`). |
+| `etl_demfile.py`, `etl_clusters.py`, `etl_mergeddemfile.py`, `etl_fasta.py`, `etl_blast.py`, `etl_infoextra.py` | Um ETL por tipo de arquivo de entrada. |
+| `processar_etl.py` | Leitura/escrita de arquivos (Excel, CSV, FASTA) e concatenação. |
+| `validacao.py` | Regras de validação de arquivos e dados. |
 | `intervalos.py` | Lógica de mapeamento de intervalos de placa. |
 | `placa_grid.py` | Widget de grid de placa (96 poços) da GUI. |
-| `utilitariosv2.py` | Utilitários compartilhados (log, placeholders, abort). |
+| `utilitarios.py` | Utilitários compartilhados (log, placeholders, abort). |
 
 ## Requisitos
 

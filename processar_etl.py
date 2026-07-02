@@ -1,7 +1,7 @@
 import pandas as pd
 from Bio import SeqIO
-from utilitariosv2 import Utilits
-from validacao_v2 import Validate
+from utilitarios import Utilits
+from validacao import Validate
 from tkinter import messagebox
 
 class Process_file:    

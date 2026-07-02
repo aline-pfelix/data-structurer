@@ -3,18 +3,18 @@ import pandas as pd
 import os
 import traceback
 from tkinter import messagebox
-from utilitariosv2 import Utilits
+from utilitarios import Utilits
 
 
 # Importando as novas classes
-from ETL_DEMFILE_v3 import EtlDemfile
-from ETL_CLUSTERS_v3 import EtlClusters
-from ETL_MERGEDDEMFILE_v3 import EtlMergedDemfile
-from ETL_FASTA_v4 import EtlFasta
-from ETL_BLAST_v2 import EtlBlast
-from ETL_INFOEXTRA_v2 import EtlInfoExtra
-from utilitariosv2 import AbortarExecucao
-from processar_etlv2 import Process_file
+from etl_demfile import EtlDemfile
+from etl_clusters import EtlClusters
+from etl_mergeddemfile import EtlMergedDemfile
+from etl_fasta import EtlFasta
+from etl_blast import EtlBlast
+from etl_infoextra import EtlInfoExtra
+from utilitarios import AbortarExecucao
+from processar_etl import Process_file
 
 dfs_demfile_concat_all = []
 dfs_cluster_all = []

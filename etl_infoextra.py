@@ -1,8 +1,8 @@
 import pandas as pd
-from utilitariosv2 import Utilits
+from utilitarios import Utilits
 from intervalos import Intervals
-from validacao_v2 import Validate
-from processar_etlv2 import Process_file
+from validacao import Validate
+from processar_etl import Process_file
 
 class EtlInfoExtra:
     def to_process(self, dfs_demfile_concat, parametros, intervals_map, pasta_output, text_log, btn_exec, root):

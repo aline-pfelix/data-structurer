@@ -1,7 +1,7 @@
-from utilitariosv2 import Utilits
-from validacao_v2 import Validate
+from utilitarios import Utilits
+from validacao import Validate
 from tkinter import messagebox
-from processar_etlv2 import Process_file
+from processar_etl import Process_file
 
 class EtlClusters:
 
