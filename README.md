@@ -83,22 +83,14 @@ python data_structurer_etl.py
 4. Clique em **Adicionar mais uma corrida** para processar várias corridas juntas, ou **Executar ETL** para rodar.
 5. Os CSVs resultantes (`demfile_etl.csv`, `clustercode_etl.csv`, `mergeddemfile_etl.csv`, `filefasta_etl.csv`, `blast_etl.csv`, `infoextra_etl.csv`) são gerados em uma pasta `etl_results/` criada ao lado da pasta de entrada.
 
-## Gerando um novo instalador
+## Gerando o executável
 
-Duas etapas: primeiro empacotar o `.exe` com PyInstaller, depois gerar o instalador com Inno Setup.
+```bash
+pip install -r requirements-dev.txt
+pyinstaller Data_Structurer_v3.0.1.spec
+```
 
-1. **Empacotar o `.exe`:**
-
-   ```bash
-   pip install -r requirements-dev.txt
-   pyinstaller Data_Structurer_v3.0.1.spec
-   ```
-
-   O executável e o `Borboleta.ico` são gerados em `dist/`.
-
-2. **Gerar o instalador com Inno Setup:** abra `D:\Workspace\Ferramentas_dev\Instaladores\Instalador_DataStructurer\sript_data_structure_v106.iss` no Inno Setup (ou compile via linha de comando com `ISCC.exe`) e compile. Antes de compilar uma versão nova, atualize `MyAppVersion`, `MyAppExeName` e `OutputBaseFilename` no início do script para o número da nova versão — os caminhos em `Source:` e `SetupIconFile` já apontam para este repositório (`D:\Workspace\Ferramentas_dev\scripts\datastructurer`).
-
-   O instalador é gerado em `D:\Workspace\Ferramentas_dev\Instaladores\Instalador_DataStructurer\` e publicado manualmente como asset de uma nova [Release](https://github.com/aline-pfelix/datastructurer/releases) no GitHub.
+O executável e o `Borboleta.ico` são gerados em `dist/`. O instalador publicado nas Releases é gerado separadamente a partir desse executável e enviado manualmente.
 
 ## Observações
 
