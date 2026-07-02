@@ -1,0 +1,19 @@
+# Virtual environments
+venv_etl/
+venv/
+.venv/
+
+# PyInstaller build artifacts
+build/
+dist/
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+
+# Editor/OS junk
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

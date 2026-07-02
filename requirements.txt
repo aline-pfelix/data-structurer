@@ -1,0 +1,4 @@
+pandas>=2.0.3
+biopython>=1.83
+tkcalendar>=1.6.1
+openpyxl>=3.1.5
