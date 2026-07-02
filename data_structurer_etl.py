@@ -3,15 +3,12 @@
 ### --------------------------------------------------------------- ###
 
 # ---------------------------------------------------------------------
-# from guiv2 import IntervalEditor
 from placa_grid import PlacaGrid
 from utilitarios import Utilits
 from validacao import Validate
-from intervalos import Intervals
 from main_etl import DemfileController
 import os
 import threading
-from pathlib import Path
 from tkcalendar import DateEntry
 import re
 import tkinter as tk
@@ -202,18 +199,6 @@ def create_main_window():
 
     frm_intervals.pack(fill='x')
 
-    # frame_row = ttk.Frame(frm_intervals)
-    # frame_row.pack(fill='x')
-
-    # ie_extract = IntervalEditor(frame_row, 'Método de extração:')
-    # ie_extract.pack(side='left', fill='both', expand=True, padx=5)
-    # ie_frag = IntervalEditor(frame_row, 'Fragmento (Ex: 454):')
-    # ie_frag.pack(side='left', fill='both', expand=True, padx=5)
-    # ie_temp = IntervalEditor(frame_row, 'Temperatura de pareamento do primer (Ex:50):')
-    # ie_temp.pack(side='left', fill='both', expand=True, padx=5)
-    # ie_cycle = IntervalEditor(frame_row, 'Quantidade de ciclos da PCR (Ex:30):')
-    # ie_cycle.pack(side='left', fill='both', expand=True, padx=5)
-
     placa_grid = PlacaGrid(frm_intervals)
     placa_grid.pack(fill="both", expand=True)
 
@@ -330,30 +315,11 @@ def create_main_window():
         # ---- ETAPA 2: INTERVALOS (RESPEITANDO 'TODAS') ---- #
         intervals_map = {}
 
-        # try:
-        #     intervals_map = {
-        #         'extract': Intervals.validate_interval_editor(ie_extract, "Método de extração"),
-        #         'frag': Intervals.validate_interval_editor(ie_frag, "Fragmento"),
-        #         'temp': Intervals.validate_interval_editor(ie_temp, "Temperatura"),
-        #         'cycle': Intervals.validate_interval_editor(ie_cycle, "Ciclos da PCR")
-        #     }
-        # except ValueError as e:
-        #     messagebox.showerror("Erro de validação", str(e))
-        #     return
-
         try:
             intervals_map = placa_grid.collect()
         except ValueError as e:
             messagebox.showerror("Erro de validação", str(e))
             return
-
-        # intervals_map_final = {}
-
-        # for col, data in intervals_map.items():
-        #     if data["modo"] == "todas":
-        #         intervals_map_final[col] = None  # sinaliza "todas"
-        #     else:
-        #         intervals_map_final[col] = data["intervalos"]
 
         # limpar log
         txt_log.configure(state='normal')
@@ -395,11 +361,6 @@ def create_main_window():
 
             ent_blast.set_date(ent_blast._date.today())
 
-            # RESET CORRETO DOS INTERVAL EDITORS
-            # ie_extract.reset()
-            # ie_frag.reset()
-            # ie_temp.reset()
-            # ie_cycle.reset()
             placa_grid.reset()
 
             txt_log.configure(state='normal')

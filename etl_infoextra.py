@@ -2,7 +2,6 @@ import pandas as pd
 from utilitarios import Utilits
 from intervalos import Intervals
 from validacao import Validate
-from processar_etl import Process_file
 
 class EtlInfoExtra:
     # ------------------------------------------------------------------------- #
@@ -126,8 +125,3 @@ class EtlInfoExtra:
             return
         
         return df_infoextra
-
-
-        # Exporta csv
-        # name_output = '/infoextra_etl.csv'
-        # Process_file.export_csv(self, df_infoextra, pasta_output, name_output)

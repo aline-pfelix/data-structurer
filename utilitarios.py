@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk, filedialog, messagebox
+from tkinter import messagebox
 
 
 class Utilits:
@@ -10,11 +10,6 @@ class Utilits:
             text_widget.see(tk.END)
             text_widget.configure(state='disabled')
         text_widget.after(1, _append)
-
-    def show_error(self,title, message, exc=None):
-        if exc:
-            message = f"{message}\n\nDetalhes:\n{exc}"
-        messagebox.showerror(title, message)
 
     def add_placeholder(entry, text):
         entry._placeholder = text

@@ -2,7 +2,6 @@ import pandas as pd
 from Bio import SeqIO
 from utilitarios import Utilits
 from validacao import Validate
-from tkinter import messagebox
 
 class Process_file:    
     # Leitura dos arquivos excel
@@ -159,12 +158,7 @@ class Process_file:
             raise ValueError(f"Modo de validação desconhecido: {modo}")
 
 
-    # Exportar .csv
-    def export_csv (self, df, pasta_output, name_output):
-        df.to_csv(str(pasta_output) + name_output, index=False)
-
-
-    # Validar e exportar .csv concatenado 
+    # Validar e exportar .csv concatenado
     def export_csv_concat (df, pasta_output, name_output, text_log, btn_exec, root, column_name):
         
         dfs_all = pd.concat(df, ignore_index=True, sort=False)
@@ -192,20 +186,3 @@ class Process_file:
         )
 
         return 
-    
-    # Leitura dos arquivos csv
-    @staticmethod
-    def _read_inputfiles_csv(pasta, text_log, name_file, header=None):
-        dfs = []
-        for inputfiles in pasta.iterdir():
-            if not Validate.valid_file(inputfiles):
-                continue
-            
-            if inputfiles.name.endswith(str(name_file)):
-                Utilits.append_log(text_log, f'  - Lendo: {inputfiles.name}')
-                dfs.append(pd.read_csv(inputfiles, sep=',', header=header, dtype=str, engine='python'))
-
-        if not dfs:
-            return pd.DataFrame()
-
-        return pd.concat(dfs, ignore_index=True)

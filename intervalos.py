@@ -57,10 +57,6 @@ class Intervals:
         if len(racks_existentes) == 0:
             raise ValueError("Nenhuma placa válida foi encontrada no demfile.")
 
-        rack_min = racks_existentes.min()
-        rack_max = racks_existentes.max()
-
-
         def validate_non_overlapping_intervals(intervals, col_name=None):
             # ordenar por início
             intervals_sorted = sorted(intervals, key=lambda x: x[0])
@@ -164,7 +160,6 @@ class Intervals:
                     Utilits.append_log(
                         log_widget,
                         f"{col}: {Validate.format_three(start)}–{Validate.format_three(end)}"
-                        # f"  {col}: {Intervals.format_three(start)}–{Intervals.format_three(end)} "
                         f"→ '{val}' aplicado em {mask.sum()} linha(s)"
                     )
 
@@ -225,33 +220,3 @@ class Intervals:
             )
 
         return df_infoextra
-
-
-    # def validate_interval_editor(editor, nome):
-        try:
-            data = editor.collect()
-        except ValueError as e:
-            raise ValueError(str(e))
-
-        modo = data.get("modo")
-
-        if modo == "todas":
-            valor = data.get("valor", "").strip()
-            if not valor:
-                raise ValueError(
-                    f"O campo '{nome}' é obrigatório e está vazio."
-                )
-
-        elif modo == "intervalos":
-            intervalos = data.get("intervalos", [])
-            if not intervalos:
-                raise ValueError(
-                    f"O campo '{nome}' deve ter ao menos um intervalo definido."
-                )
-
-        else:
-            raise ValueError(
-                f"Modo inválido detectado em '{nome}'."
-            )
-
-        return data

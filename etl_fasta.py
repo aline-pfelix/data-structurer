@@ -1,7 +1,4 @@
-import pandas as pd
-from Bio import SeqIO
 from utilitarios import Utilits
-from validacao import Validate
 from processar_etl import Process_file
 
 class EtlFasta:
@@ -24,7 +21,6 @@ class EtlFasta:
         df_fasta = Process_file._read_inputfiles_fasta(pasta, text_log, name_file)
 
         if df_fasta.empty:
-        # if not df_fasta :
             Utilits.append_log(text_log, "Nenhum arquivo fasta encontrado.")
 
             btn_exec.configure(state='normal')
@@ -73,10 +69,6 @@ class EtlFasta:
             btn_exec=btn_exec, 
             root=root,   
         )
-
-        # # Exporta csv
-        # name_output = '/filefasta_etl.csv'
-        # Process_file.export_csv(self, df_fasta, pasta_output, name_output)
 
         return df_fasta
     

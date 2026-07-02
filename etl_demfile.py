@@ -1,6 +1,5 @@
 import pandas as pd
 from utilitarios import Utilits
-from validacao import Validate
 from processar_etl import Process_file
 from tkinter import messagebox
 
@@ -30,13 +29,6 @@ class EtlDemfile:
             'descricao': 'SampleID'
         }
     }
-
-    # REGEX_VALIDATIONS_LOCAL = {
-    #     'Locality': {
-    #         'regex': r'[A-Za-z]{1,20}-[A-Za-z]{1,30}-[A-Za-z]{1,50}-[A-Za-z0-9]{1,30}',
-    #         'descricao': 'Locality'
-    #     }
-    # }
 
     # ------------------------------------------------------------------------- #
     # PROCESSAMENTO DO DEMFILE                                                  #
@@ -97,9 +89,6 @@ class EtlDemfile:
             column_name=column_name
         )
 
-        # name_output = '/demfile_etl.csv'
-        # Process_file.export_csv(self, dfs_demfile_concat, pasta_output, name_output)
-
         return dfs_demfile_concat, codespeciescompleted
 
     def _validate_regex(self, df):
@@ -136,9 +125,7 @@ class EtlDemfile:
         aviso = self._validate_local_parts(df)
 
         if aviso:
-            return aviso  
-
-        # self._validate_regex_local(df)
+            return aviso
 
         return None
     
@@ -170,35 +157,6 @@ class EtlDemfile:
             'quantidade': int(mask_invalido.sum()),
             'exemplos': exemplos
         }
-
-    # def _validate_regex_local(self, df):
-    #     erros = []
-
-    #     for coluna, regra in self.REGEX_VALIDATIONS_LOCAL.items():
-
-    #         if coluna not in df.columns:
-    #             erros.append(f"Coluna ausente: {coluna}")
-
-    #             continue
-
-    #         mask_valido = (
-    #             df[coluna]
-    #             .astype(str)
-    #             .str.fullmatch(regra['regex'])
-    #         )
-
-    #         invalidos = df.loc[~mask_valido | df[coluna].isna(), [coluna]]
-
-    #         if not invalidos.empty:
-    #             erros.append(
-    #                 f"{regra['descricao']} → {len(invalidos)} valores inválidos"
-    #                 f'{invalidos}'
-    #             )
-
-    #     if erros:
-    #         raise ValueError(
-    #             "Erros de validação encontrados:\n" + "\n".join(erros)
-    #         )
 
     # Transformações e limpeza dos dados
     def transform_data(self, df):
@@ -315,48 +273,3 @@ class EtlDemfile:
         )
 
         return df
-
-    # def _formatar_clean_datas(self, df, text_log=None, btn_exec=None, root=None):
-    #     # Linhas NEG não são convertidas
-    #     mask_neg = df['specimenCode'].str.contains('neg', case=False, na=False)
-
-    #     replacements = {
-    #         'Fev': 'Feb', 'Abr': 'Apr', 'Mai': 'May',
-    #         'Ago': 'Aug', 'Set': 'Sep', 'Out': 'Oct', 'Dez': 'Dec'
-    #     }
-
-    #     # Garante string sem gerar "nan"
-    #     df['date'] = df['date'].where(df['date'].notna(), '')
-
-    #     for pt, en in replacements.items():
-    #         df.loc[~mask_neg, 'date'] = df.loc[~mask_neg, 'date'].str.replace(pt, en)
-
-    #     # Converte apenas para validar
-    #     date_parsed = pd.to_datetime(
-    #         df.loc[~mask_neg, 'date'],
-    #         format='%d%b%Y',
-    #         errors='coerce'
-    #     )
-
-    #     invalidos = df.loc[
-    #         ~mask_neg &
-    #         date_parsed.isna() &
-    #         (df['date'].str.strip() != '')
-    #     ]
-
-    #     if not invalidos.empty:
-    #         Utilits.abortar_execucao(
-    #             mensagem=(
-    #                 "Erro ao converter datas:\n\n"
-    #                 + invalidos[['specimenCode', 'date']].to_string(index=False)
-    #             ),
-    #             parent=root,
-    #             log_widget=text_log,
-    #             botao_exec=btn_exec
-    #         )
-    #         return None  # ⬅️ ENCERRA AQUI SEM TRAVAR
-
-    #     # Atualiza date só se tudo estiver válido
-    #     df.loc[~mask_neg, 'date'] = date_parsed.dt.strftime('%Y-%m-%d')
-
-    #     return df

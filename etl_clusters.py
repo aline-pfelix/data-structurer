@@ -1,6 +1,4 @@
 from utilitarios import Utilits
-from validacao import Validate
-from tkinter import messagebox
 from processar_etl import Process_file
 
 class EtlClusters:
@@ -78,11 +76,6 @@ class EtlClusters:
 
         # ---- ETAPA 5: LIMPEZA DE EXCEDENTES ---- #
         dfs_cluster = dfs_cluster[dfs_cluster['specimenCodeCluster'].isin(list_clean)]
-
-
-        # # Exporta csv
-        # name_output = '/clustercode_etl.csv'
-        # Process_file.export_csv(self, dfs_cluster, pasta_output, name_output)
 
         return dfs_cluster
 

@@ -1,5 +1,4 @@
 from pathlib import Path
-import pandas as pd
 import os
 import traceback
 from tkinter import messagebox
@@ -13,7 +12,6 @@ from etl_mergeddemfile import EtlMergedDemfile
 from etl_fasta import EtlFasta
 from etl_blast import EtlBlast
 from etl_infoextra import EtlInfoExtra
-from utilitarios import AbortarExecucao
 from processar_etl import Process_file
 
 dfs_demfile_concat_all = []
@@ -51,11 +49,6 @@ class DemfileController:
                 if not os.path.exists(pasta_output):
                     os.mkdir(pasta_output)
                     Utilits.append_log(text_log, f"Pasta etl_results criada: {pasta_output}")
-                # else:
-                #     # Utilits.append_log(text_log, f"Pasta etl_results já existe, resultados serão sobrescritos.")
-                #     Utilits.append_log(text_log, 'Pasta "etl_results" já existe no destino. Abortando.')
-                #     Utilits.abortar_execucao(mensagem= 'A pasta "etl_results" já existe no destino.')
-                #     btn_exec.configure(state='normal')
 
                 # ---- ETAPA 1: PROCESSAR DEMFILE ---- #
                 etl_demfile = EtlDemfile()

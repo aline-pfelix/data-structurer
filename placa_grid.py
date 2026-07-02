@@ -342,21 +342,6 @@ class PlacaGrid(ttk.Frame):
         return result
 
 
-    def get_data(self) -> dict:
-        """Igual a collect(), sem validação."""
-        if self._aplicar_todas.get():
-            return {
-                key: {"modo": "todas", "valor": var.get().strip()}
-                for key, var in self._todas_vars.items()
-            }
-        result = {key: {"modo": "grade", "linhas": []} for key in COLUNAS}
-        for row_idx, row_vars in enumerate(self._cells):
-            placa = self._plate_vars[row_idx].get().strip() if row_idx < len(self._plate_vars) else ""
-            for key, var in row_vars.items():
-                result[key]["linhas"].append({"placa": placa, "valor": var.get().strip()})
-        return result
-
-
     def clear(self):
         """Limpa valores mantendo a estrutura."""
         for var in self._todas_vars.values():

@@ -1,5 +1,4 @@
 import re
-import pandas as pd
 import datetime
 from pathlib import Path
 
@@ -28,13 +27,6 @@ class Validate:
             )
 
         return valor
-
-    def validate_regex(valor, regex, nome, exemplo=None):
-        if not re.fullmatch(regex, valor):
-            msg = f"Formato inválido para '{nome}'."
-            if exemplo:
-                msg += f" Exemplo válido: {exemplo}"
-            raise ValueError(msg)
 
     def validate_df_not_nan_conditional(df, col_not_nan, col_condicional="specimenCode"):
         erros = []
@@ -111,17 +103,6 @@ class Validate:
         coord = None
         altitude = None
 
-        # if coord_index == 4:
-        #     try:
-        #         coord = float(ent_coord.get().strip())
-        #         altitude = float(ent_alt.get().strip())
-        #     except ValueError:
-        #         raise ValueError(
-        #             "Coordenada deve ser no padrão decimal e a altitude valor numérico."
-        #         )
-
-        # return coord_index, coord, altitude
-    
         if coord_index == 4:
             try:
                 entrada = ent_coord.get().strip()

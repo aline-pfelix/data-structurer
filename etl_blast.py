@@ -1,5 +1,4 @@
 from utilitarios import Utilits
-from validacao import Validate
 from processar_etl import Process_file
 
 class EtlBlast:
@@ -20,7 +19,6 @@ class EtlBlast:
         name_file = '.tsv'
         sep = '\t'
         dfs_blasted_concat = Process_file.read_inputfiles_csv(pasta, text_log, name_file, sep)
-        #countblastedfile = 0
 
         if dfs_blasted_concat.empty:
             Utilits.append_log(text_log, "Nenhum arquivo .tsv encontrado.")
@@ -73,10 +71,6 @@ class EtlBlast:
             root=root, 
             
         )
-
-        # Exporta csv
-        # name_output = '/blast_etl.csv'
-        # Process_file.export_csv(self, dfs_blasted_concat, pasta_output, name_output)
 
         return dfs_blasted_concat
     
