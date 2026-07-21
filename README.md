@@ -100,7 +100,7 @@ O executável e o `Borboleta.ico` são gerados em `dist/`. O instalador publicad
 
 ## Como citar
 
-Félix, A. P. (2026). *Data Structurer* (Versão 3.0.1) [Software]. https://github.com/aline-pfelix/data-structurer
+Félix, A. P. (2026). *Data Structurer* (Versão 3.0.2) [Software]. https://github.com/aline-pfelix/data-structurer
 
 ## Autora
 
