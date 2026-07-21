@@ -1,5 +1,8 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+from pathlib import Path
+
+versao = Path(SPECPATH, 'VERSION').read_text(encoding='utf-8').strip()
 
 a = Analysis(
     ['data_structurer_etl.py'],
@@ -22,7 +25,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='Data_Structurer_v3.0.1',
+    name=f'Data_Structurer_v{versao}',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

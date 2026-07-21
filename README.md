@@ -56,7 +56,8 @@ data-structurer/
 ├── placa_grid.py                # widget de grid de placa (96 poços) da GUI
 ├── utilitarios.py               # utilitários compartilhados (log, placeholders, abort)
 ├── Borboleta.ico                 # ícone do app
-├── Data_Structurer_v3.0.1.spec   # build do executável com PyInstaller
+├── Data_Structurer.spec          # build do executável com PyInstaller
+├── VERSION                       # versão atual, lida pelo .spec para nomear o .exe
 ├── requirements.txt
 └── requirements-dev.txt
 ```
@@ -87,7 +88,7 @@ python data_structurer_etl.py
 
 ```bash
 pip install -r requirements-dev.txt
-pyinstaller Data_Structurer_v3.0.1.spec
+pyinstaller Data_Structurer.spec
 ```
 
 O executável e o `Borboleta.ico` são gerados em `dist/`. O instalador publicado nas Releases é gerado separadamente a partir desse executável e enviado manualmente.
