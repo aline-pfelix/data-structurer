@@ -95,4 +95,11 @@ O executável e o `Borboleta.ico` são gerados em `dist/`. O instalador publicad
 ## Observações
 
 - O app é Windows-only (usa `tkinter.iconbitmap` com `.ico` e caminhos de instalação do Windows).
-- A licença (MIT) e a autoria estão no arquivo `LICENSE`.
+- A licença (MIT) e a autoria estão no arquivo [LICENSE](LICENSE).
+
+## Como citar
+
+Félix, A. P. (2026). *Data Structurer* (Versão 3.0.1) [Software]. https://github.com/aline-pfelix/data-structurer
+
+## Autora
+
