@@ -3,12 +3,6 @@ import datetime
 from pathlib import Path
 
 class Validate:
-    @staticmethod
-    def format_three(n):
-        if n is None or str(n).strip() == '':
-            return ''
-        return f"{int(n):03d}"
-
     def validate_entry_with_placeholder(entry, nome, max_len=None):
         valor = entry.get().strip()
 

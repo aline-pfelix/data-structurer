@@ -40,9 +40,6 @@ class EtlInfoExtra:
                 if modo == "todas":
                     Intervals.apply_to_all_plates(df_infoextra, col, data["valor"], log_widget=text_log)
 
-                elif modo == "intervalos":
-                    df_infoextra = Intervals.apply_intervals_to_df(df_infoextra, {col: data["intervalos"]}, log_widget=text_log)
-
                 elif modo == "grade":
                     # Valida se todos os Plate-IDs da grade existem no demfile
                     plate_ids_validos = set(df_infoextra['plateRackCode'].dropna().unique())

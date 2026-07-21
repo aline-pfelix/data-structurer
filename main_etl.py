@@ -2,7 +2,7 @@ from pathlib import Path
 import os
 import traceback
 from tkinter import messagebox
-from utilitarios import Utilits
+from utilitarios import Utilits, AbortarExecucao
 
 
 # Importando as novas classes
@@ -14,25 +14,19 @@ from etl_blast import EtlBlast
 from etl_infoextra import EtlInfoExtra
 from processar_etl import Process_file
 
-dfs_demfile_concat_all = []
-dfs_cluster_all = []
-dfs_merged_concat_all = []
-df_fasta_all = []
-dfs_blasted_concat_all = []
-dfs_infoextra_all = []
 class DemfileController:
-    global dfs_demfile_concat_all
-    global dfs_cluster_concat_all
-    global dfs_mergedemfile_concat_all
-    global dfs_fasta_concat_all
-    global dfs_blasted_concat_all
-    global dfs_infoextra_concat_all
-
     # ------------------------------------------------------------------------- #
     # EXECUÇÃO DO PIPELINE                                                      #
     # ------------------------------------------------------------------------- #
     @staticmethod
     def execute_etl_multiple(corridas_list, text_log, btn_exec, root):
+        dfs_demfile_concat_all = []
+        dfs_cluster_all = []
+        dfs_merged_concat_all = []
+        df_fasta_all = []
+        dfs_blasted_concat_all = []
+        dfs_infoextra_all = []
+
         try:
             total = len(corridas_list)
             for i, corrida in enumerate(corridas_list, 1):
@@ -132,6 +126,9 @@ class DemfileController:
             Utilits.append_log(text_log, f"Processamento finalizado para {total} corrida(s).")
             messagebox.showinfo("Concluído", f"Processamento finalizado para {total} corrida(s).")
 
+        except AbortarExecucao:
+            # Aviso e log já foram emitidos por Utilits.abortar_execucao.
+            pass
         except Exception as e:
             Utilits.append_log(text_log, "Erro inesperado durante a execução:")
             Utilits.append_log(text_log, str(e))
