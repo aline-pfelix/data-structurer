@@ -1,8 +1,3 @@
-### --------------------------------------------------------------- ###
-### Created by:  Aline Priscila Félix                               ###
-### --------------------------------------------------------------- ###
-
-# ---------------------------------------------------------------------
 from placa_grid import PlacaGrid
 from utilitarios import Utilits
 from validacao import Validate

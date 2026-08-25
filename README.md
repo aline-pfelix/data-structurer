@@ -1,6 +1,6 @@
 # Data Structurer
 
-Aplicação desktop (Tkinter) para consolidar os arquivos gerados por uma corrida de sequenciamento MinION (Demfile, Mergedemfile, Fasta, clusters, BLAST) em planilhas CSV prontas para importação em banco de dados.
+Aplicação desktop para consolidar os arquivos gerados por uma corrida de sequenciamento MinION (Demfile, Mergedemfile, Fasta, clusters, BLAST) em planilhas CSV prontas para importação em banco de dados.
 
 ## Funcionalidades
 
@@ -101,6 +101,4 @@ O executável e o `Borboleta.ico` são gerados em `dist/`. O instalador publicad
 ## Como citar
 
 Félix, A. P. (2026). *Data Structurer* (Versão 3.0.2) [Software]. https://github.com/aline-pfelix/data-structurer
-
-## Autora
 

@@ -1,7 +1,3 @@
-### --------------------------------------------------------------- ###
-### Created by:  Aline Priscila Félix                               ###
-### --------------------------------------------------------------- ###
-
 import tkinter as tk
 from tkinter import ttk, messagebox
 
